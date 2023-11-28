@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostsService } from 'src/app/service/posts.service';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-post-attivi',
@@ -6,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-attivi.component.scss']
 })
 export class PostAttiviComponent implements OnInit {
-
-  constructor() { }
+  posts: Post[] = [];
+  constructor(private postSrv: PostsService) { 
+    this.postSrv.recuperaPosts().then((posts) => {
+      this.posts = posts;
+      console.log(this.posts)
+    })
+   }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostsService } from 'src/app/service/posts.service';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-post-disattivati',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostDisattivatiComponent implements OnInit {
 
-  constructor() { }
+  posts: Post[] = [];
+  constructor(private postSrv: PostsService) { 
+    this.postSrv.recuperaPosts().then((posts) => {
+      this.posts = posts;
+      console.log(this.posts)
+    })
+   }
 
   ngOnInit(): void {
   }
